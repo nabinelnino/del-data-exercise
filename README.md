@@ -1,29 +1,15 @@
 # DEL Screening Data: Hands-On Data Engineering Exercise
 
-Welcome, and thanks for taking the time. Please read this whole document
-before you write any code. It explains the context, how to set up, what
-we'll ask you to do, and what we care about. Most questions you might have
-are answered here. Anything that isn't is a good question to ask us during
-the session.
-
----
 
 ## 1. Context
 
-You've joined a drug-discovery data team. Our chemists run **DEL screens**
-(DNA-encoded library screens): millions of small-molecule compounds, each
-tagged with a unique DNA barcode, are exposed to a protein **target**.
-Compounds that bind the target are pulled out and their barcodes are
-sequenced. The number of sequencing **reads** for a compound tells us how
-strongly it was enriched, so a high read count means a potentially
-interesting compound (a "hit").
+You've joined a drug-discovery data team. Our chemists run DEL
+(DNA-encoded library) screens: compounds are tested against protein
+targets, and sequencing read counts show which compounds bound. A vendor
+sends us the results as CSV files, and scientists use our reports to
+decide which compounds to follow up on.
 
-Sequencing results come to us from vendors as CSV files. Scientists rely on
-the reports we build from them to decide which compounds to follow up on,
-so **numbers that are wrong but look right are worse than a crash**.
-
-You don't need any chemistry or biology knowledge. Everything you need is
-in the data and in this document.
+No chemistry knowledge is needed.
 
 ---
 
@@ -40,7 +26,7 @@ pip install -r requirements.txt
 ```
 
 We recommend using the pinned versions so your results are comparable with
-ours. If you use a different version, tell us which one (`pd.__version__`).
+ours. 
 
 **Prefer PySpark?** That's fine. Uncomment the `pyspark` line in
 `requirements.txt` and make sure Java 17+ is installed. **Check that a
@@ -103,81 +89,21 @@ latest `ingested_at` is the correct one**.
 
 | Column | Meaning |
 |---|---|
-| `library_id` | Library identifier (join key to the screening data) |
+| `library_id` | Library identifier  |
 | `library_name` | Human-readable name |
 | `num_cycles` | Number of chemistry cycles used to build the library |
 | `vendor` | Who built the library |
 | `theoretical_size` | Number of distinct compounds the library could contain |
 
-### 3.3 Other files (used in the later parts)
-
-| File | Used in |
-|---|---|
-| `qc_runs.csv` | Part 2, Challenge A: quality-control runs per library |
-| `buggy_pipeline.py` | Part 2, Challenge A |
-| `day1.csv`, `day2.csv`, `day3.csv` | Part 2, Challenge B |
-
-**Treat every file as real vendor data that you're seeing for the first time.**
 
 ---
 
 ## 4. What you'll do
 
-The session has a **core exercise (Part 1)**. Depending on time, we'll
-continue with one of the **advanced challenges (Part 2)**. We'll tell you
-during the session when to move from one part to the next. **Please don't
-start the tasks in advance**: setup and reading the data dictionary are
-all we ask beforehand.
 
-### Part 1: Core exercise (~45 minutes, plus discussion)
-
-Part 1 is in stages. Each stage builds on the previous one.
-
-**Stage 1: Load and summarise (~15 min)**
-
-Load `del_screening_data.csv` and answer:
-
-1. How many **valid** records are there?
-2. What is the **total number of reads per target**?
-
-What counts as "valid" is part of the exercise. Decide, tell us your
-definition, and be ready to justify it. You're welcome to ask us what the
-business wants.
-
-**Stage 2: Deduplicate and enrich (~15 min)**
-
-1. Make sure each screening result `(compound_id, target, replicate)`
-   appears **once**, keeping the **latest** version by `ingested_at`.
-2. Join the result to `library_reference.csv` so each row carries its
-   library metadata.
-3. Recompute the totals from Stage 1 and **report anything that looks
-   suspicious** in the data or the results.
-
-**Stage 3: Requirement change (~15 min)**
-
-We'll give you a change to the requirements at this point. Expect to adapt
-the code you've written, not start over.
-
-**Stage 4: Scale discussion (verbal, if time allows)**
-
-A conversation, no code: how would your approach change if the data were
-much larger?
-
-### Part 2: Advanced challenges (30–40 minutes)
-
-After Part 1, you'll do **one** of the two challenges below. The interviewer
-chooses which one and tells you when to start. If you finish early, we may
-move on to the other one or discuss it verbally.
-
-Both challenges are independent of your Part 1 code. You start fresh, in
-the same folder.
-
----
 
 #### Challenge A: The report that ran green
 
-**Files:** `buggy_pipeline.py`, `del_screening_data.csv`,
-`library_reference.csv`, `qc_runs.csv`
 
 **The situation**
 
@@ -198,8 +124,7 @@ error**. Last week a scientist emailed:
 **Your task**
 
 Find **every** defect in this pipeline, not only the one behind the
-scientist's complaint. There is more than one, and we won't tell you when
-you've found them all.
+scientist's complaint. There might be more than one, and you have to find them all.
 
 For **each** defect you find, tell us:
 
@@ -218,8 +143,7 @@ Then **fix the script**. Save your fixed version as `fixed_pipeline.py`
 python buggy_pipeline.py
 ```
 
-It reads the files from the current folder and prints the report. It takes
-less than a minute on the full dataset.
+It reads the files from the current folder and prints the report. 
 
 **What to hand in**
 
