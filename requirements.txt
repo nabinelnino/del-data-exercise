@@ -1,0 +1,7 @@
+# Python >= 3.11
+pandas==3.0.*
+numpy>=2.0
+pyarrow>=15
+
+# Optional, if you prefer Spark (needs Java 17+):
+# pyspark>=4.0,<5

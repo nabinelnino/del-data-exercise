@@ -1,0 +1,18 @@
+# Allow-list: ignore everything, then include only files participants need.
+*
+!.gitignore
+!README.md
+!requirements.txt
+# setup: dataset generator + reference data
+!generate_del_data.py
+!library_reference.csv
+!del_sample.csv
+
+# Part 2, Challenge A
+!buggy_pipeline.py
+!qc_runs.csv
+
+# Part 2, Challenge B
+!day1.csv
+!day2.csv
+!day3.csv

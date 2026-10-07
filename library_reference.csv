@@ -1,0 +1,6 @@
+library_id,library_name,num_cycles,vendor,theoretical_size
+LIB-A01,Library A01,3,ChemSpace,20000000
+LIB-A02,Library A02,3,InHouse,48000000
+LIB-B07,Library B07,3,WuXi,44000000
+LIB-C03,Library C03,2,ChemSpace,5000000
+LIB-Z99,Library Z99,3,InHouse,8000000
