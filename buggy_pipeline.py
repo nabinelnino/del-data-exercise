@@ -18,7 +18,6 @@ def main():
     ref = pd.read_csv("library_reference.csv")
     qc = pd.read_csv("qc_runs.csv")
 
-    # parse fields
     df["screen_date"] = pd.to_datetime(df["screen_date"], format="mixed",
                                        errors="coerce")
     df["raw_count"] = pd.to_numeric(df["raw_count"], errors="coerce")
